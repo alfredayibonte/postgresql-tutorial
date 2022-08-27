@@ -7,3 +7,11 @@ COUNT(*)
 FROM actor
 GROUP BY first_name, last_name
 HAVING COUNT(*) >1;
+
+
+-- alternative solution will be to join the distinct fullname table with the actor table and find row where actor_id isn't equal but full names are the same --
+
+SELECT DISTINCT ac.first_name, ac.last_name
+FROM actor AS ac JOIN actor
+USING(first_name, last_name)
+WHERE ac.actor_id != actor.actor_id AND ac.first_name = actor.first_name AND ac.last_name = actor.last_name;
